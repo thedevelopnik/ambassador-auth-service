@@ -1,4 +1,4 @@
-FROM mhart/alpine-node:8
+FROM node:18.15.0-alpine3.16
 
 MAINTAINER Datawire <dev@datawire.io>
 LABEL PROJECT_REPO_URL         = "git@github.com:thedevelopnik/ambassador-auth-service.git" \
