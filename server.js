@@ -41,7 +41,7 @@ app.use(addRequestId)
 app.use(logRequests)
 
 // Get authentication path from env, default to /extauth/backend/get-quote
-var authPath = '/extauth/backend/get-quote'
+var authPath = '/extauth'
 if ('AUTH_PATH' in process.env) {
   authPath = process.env.AUTH_PATH
 }
@@ -49,15 +49,15 @@ console.log(`setting authenticated path to: ${authPath}`)
 
 // Require authentication for authPath requests
 app.all(authPath.concat('*'), authenticate, function (req, res) {
-  var session = req.headers['x-qotm-session']
+  var session = req.headers['x-faces-session']
 
   if (!session) {
-    console.log(`creating x-qotm-session: ${req.id}`)
+    console.log(`creating x-faces-session: ${req.id}`)
     session = req.id
-    res.set('x-qotm-session', session)
+    res.set('x-faces-session', session)
   }
 
-  console.log(`allowing QotM request, session ${session}`)
+  console.log(`allowing Faces request, session ${session}`)
   res.send('OK (authenticated)')
 })
 
